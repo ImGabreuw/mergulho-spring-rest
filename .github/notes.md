@@ -202,3 +202,33 @@
       ```
 
   > OBS: após o registro da _migration_ em uma schema chamado `flyway_schema_history` (histórico de todas as _migration_ da aplicação) o arquivo registrado não pode ser alterado. Caso for queira alterá-la, basta deletar essa _migration_ ou criar uma nova.
+
+### Jakarta Persistence
+
+* Documentação: [clique aqui](https://jakarta.ee/specifications/persistence/3.0/)
+
+* É uma especificação que fornece uma API de objeto relacional
+* Antigamente era chamado de JPA (Java Persistence API)
+* A implementação do Jakarta Persistence mais conhecida é o Hibernate
+
+* Mapeamento objeto relacional
+
+  * Mapeia um objeto Java para uma coluna do banco da dados
+
+    ```java
+    @Entity // Responsável pelo mapeamento do objeto (Por padrão, o nome da tabela será o nome da classe)
+
+    public class Cliente {
+
+        @Id // Definir a chave primária da entidade
+        @GeneratedValue(strategy = GenerationType.IDENTITY) // Estratégia de geração do Id (GenerationType.IDENTITY = define a forma de geração padrão do banco de dados, no caso no MySQL é auto_increment)
+        private Long id;
+
+        private String nome;
+        private String email;
+        @Column(name = "fone") // Indicar o nome da coluna. Isso só é necessário quando o nome do atributo e da coluna forem diferentes
+        private String telefone;
+
+        // getters e setters
+    }
+    ```
