@@ -215,20 +215,20 @@
 
   * Mapeia um objeto Java para uma coluna do banco da dados
 
-    ```java
-    @Entity // Responsável pelo mapeamento do objeto (Por padrão, o nome da tabela será o nome da classe)
+  ```java
+  @Entity // Responsável pelo mapeamento do objeto (Por padrão, o nome da tabela será o nome da classe)
 
-    public class Cliente {
+  public class Cliente {
 
-        @Id // Definir a chave primária da entidade
-        @GeneratedValue(strategy = GenerationType.IDENTITY) // Estratégia de geração do Id (GenerationType.IDENTITY = define a forma de geração padrão do banco de dados, no caso no MySQL é auto_increment)
-        private Long id;
+      @Id // Definir a chave primária da entidade
+      @GeneratedValue(strategy = GenerationType.IDENTITY) // Estratégia de geração do Id (GenerationType.IDENTITY = define a forma de geração padrão do banco de dados, no caso no MySQL é auto_increment)
+      private Long id;
 
-        private String nome;
-        private String email;
-        @Column(name = "fone") // Indicar o nome da coluna. Isso só é necessário quando o nome do atributo e da coluna forem diferentes
-        private String telefone;
+      private String nome;
+      private String email;
+      @Column(name = "fone") // Indicar o nome da coluna. Isso só é necessário quando o nome do atributo e da coluna forem diferentes
+      private String telefone;
 
-        // getters e setters
-    }
-    ```
+      // getters e setters
+  }
+  ```
