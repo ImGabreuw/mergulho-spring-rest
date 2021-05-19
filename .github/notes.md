@@ -151,3 +151,54 @@
 * `java -jar nome-do-projeto.jar`
   > OBS: o fat JAR é o arquivo com o nome do projeto e sem a extensão `.jar.original`
 
+## Banco de dados (MySQL)
+
+### Configuração do bando de dados 
+
+* URL: [documentação](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html) 
+
+  ```
+  spring.datasource.url=jdbc:mysql://localhost/nome_do_banco_de_dados
+  ```
+
+  > Se o IP for `localhost`, a porta pode ser omitida pois a porta padrão do MySQL é 3306
+
+  * Algumas propriedades na URL
+    * `createDatabaseIfNotExist=true` = o schema será criado caso ele não existir
+    * `serverTimezone=UTC` = data e hora serão salvos na fuso horário GMT 0 (boa prática)
+
+### Flyway
+
+* Documentação: [clique aqui](https://flywaydb.org/documentation/)
+
+* Vantagem: Facilita o gerenciamento das schemas da aplicação
+
+* Criação de uma _migration_
+
+  1. Nome do arquivo **precisa** começar com a letra `V`.
+  
+  2. Em seguida vem o versão da _migration_ e pode ser escrito das seguinte maneiras: 
+
+      * `V001` = numeração em ordem crescente
+      * `V20210519` = data invertida
+      * `V202105191449` = data invertida + horário
+
+  3. Depois colocar **2 underscore** (`__`).
+
+  4. Por fim adicionar um nome descritivo e a extensão `.sql` ao arquivo
+
+  5. Resultado:
+
+      `V001__cria-tabela-cliente.sql`      
+      ```sql
+      create table cliente (
+        id bigint not null auto_increment,
+        nome varchar(60) not null,
+        email varchar(255) not null,
+        telefone varchar(20) not null,
+        
+        primary key (id)
+      )
+      ```
+
+  > OBS: após o registro da _migration_ em uma schema chamado `flyway_schema_history` (histórico de todas as _migration_ da aplicação) o arquivo registrado não pode ser alterado. Caso for queira alterá-la, basta deletar essa _migration_ ou criar uma nova.
