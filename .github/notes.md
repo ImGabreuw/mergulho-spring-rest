@@ -232,3 +232,18 @@
       // getters e setters
   }
   ```
+
+## Bean Validation
+
+* Documentação: [clique aqui](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
+
+* Validação de dados no Spring
+
+* Validação
+
+  * `@NotBlank` = verificação se o atributo recebeu um valor `null` ou vazio (`""`)
+
+  * `@Size`
+    * `@Size(max = 60)` = limite para no máximo 60 caracteres
+
+  * `@Email` = validação da sintaxe básica de um email (`@` e `.`)
