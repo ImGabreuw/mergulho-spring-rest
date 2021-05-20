@@ -3,6 +3,7 @@ package me.gabreuw.algalog.api.controller;
 import lombok.RequiredArgsConstructor;
 import me.gabreuw.algalog.domain.model.Cliente;
 import me.gabreuw.algalog.domain.repository.ClienteRepository;
+import me.gabreuw.algalog.domain.service.CatalogoClienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteRepository repository;
+    private final CatalogoClienteService service;
 
     @GetMapping
     public List<Cliente> listar() {
@@ -33,8 +35,8 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        return repository.save(cliente);
+    public Cliente salvar(@Valid @RequestBody Cliente cliente) {
+        return service.salvar(cliente);
     }
 
     @PutMapping(path = "/{clienteId}")
@@ -51,7 +53,7 @@ public class ClienteController {
         cliente.setId(clienteId);
 
         return ResponseEntity
-                .ok(repository.save(cliente));
+                .ok(service.salvar(cliente));
     }
 
     @DeleteMapping(path = "/{clienteId}")
@@ -62,7 +64,7 @@ public class ClienteController {
                     .build();
         }
 
-        repository.deleteById(clienteId);
+        service.deletar(clienteId);
 
         return ResponseEntity
                 .noContent()
