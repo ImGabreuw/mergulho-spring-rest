@@ -345,3 +345,48 @@
     * `@Size(max = 60)` = limite para no máximo 60 caracteres
 
   * `@Email` = validação da sintaxe básica de um email (`@` e `.`)
+
+* Validação em cascata e Validation Groups
+
+  * Validation Groups são interfaces de marcações   
+    ```java
+    public interface ValidationGroups {
+
+      interface ClienteId {}
+
+    }
+    ```
+
+  * Conversão do Validation Group `Default.class` para o `ValidationGroups.ClienteId.class`
+    ```java
+    @Entity
+    public class Entrega {
+
+        @Id
+        @GeneratedValue(strategy = IDENTITY)
+        private Long id;
+
+        @NotNull
+        private BigDecimal taxa;
+
+        @JsonProperty(access = READ_ONLY)
+        private LocalDateTime dataPedido;
+
+        @JsonProperty(access = READ_ONLY)
+        private LocalDateTime dataFinalizacao;
+
+        @Valid // Validação dos atributos do Cliente baseado nas constrains desse objeto
+        @ConvertGroup(to = ValidationGroups.ClienteId.class) // conversão do ValidationGroup Default (por padrão) para uma customizada
+        @NotNull
+        @ManyToOne
+        private Cliente cliente;
+
+        @Embedded
+        private Destinatario destinatario;
+
+        @JsonProperty(access = READ_ONLY)
+        @Enumerated(EnumType.STRING)
+        private StatusEntrega status;
+
+    }
+    ```
