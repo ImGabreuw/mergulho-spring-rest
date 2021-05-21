@@ -217,7 +217,6 @@
 
   ```java
   @Entity // Responsável pelo mapeamento do objeto (Por padrão, o nome da tabela será o nome da classe)
-
   public class Cliente {
 
       @Id // Definir a chave primária da entidade
@@ -232,6 +231,105 @@
       // getters e setters
   }
   ```
+
+  * Mapeamento da **chave estrangeira** com `@ManyToOne`
+
+  ```java
+  @Entity
+  public class Entrega {
+
+      @Id
+      @GeneratedValue(strategy = IDENTITY)
+      private Long id;
+
+      private BigDecimal taxa;
+      private LocalDateTime dataPedido;
+      private LocalDateTime dataFinalizacao;
+
+      @ManyToOne // muitas entregas tem 1 cliente
+      private Cliente cliente;
+
+      private Destinatario destinatario;
+
+      private StatusEntrega status;
+
+      // getters e setters
+  }
+  ```
+
+  * Abstração dos dados do Destinatário para um outra classe (POO)
+
+  ```java
+  @Entity
+  public class Entrega {
+
+      @Id
+      @GeneratedValue(strategy = IDENTITY)
+      private Long id;
+
+      private BigDecimal taxa;
+      private LocalDateTime dataPedido;
+      private LocalDateTime dataFinalizacao;
+
+      @ManyToOne // muitas entregas tem 1 cliente
+      private Cliente cliente;
+
+      @Embedded // mapeamento dos dados do destinatário para a mesma tabela (Entrega)
+      private Destinatario destinatario;
+      
+      @Enumerated(EnumType.STRING) // normalização do valor da enum (Nome do status)
+      private StatusEntrega status;
+
+      // getters e setters
+  }
+  ```
+
+  * Classe embeddable
+  ```java
+  @Embeddable // torna a classe passível de ser ou não embutida em uma tabela
+  public class Destinatario {
+
+    private String name;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+
+    // getters e setters
+  }
+  ```
+
+  * Propriedades Json
+  ```java
+  @Entity
+  public class Entrega {
+
+      @Id
+      @GeneratedValue(strategy = IDENTITY)
+      private Long id;
+
+      private BigDecimal taxa;
+
+      @JsonProperty(access = READ_ONLY) // impedir o consumidor da API de especificar dados que é fornecido automaticamente pela API 
+      private LocalDateTime dataPedido;
+
+      @JsonProperty(access = READ_ONLY)
+      private LocalDateTime dataFinalizacao;
+
+      @ManyToOne
+      private Cliente cliente;
+
+      @Embedded
+      private Destinatario destinatario;
+      
+      @JsonProperty(access = READ_ONLY)
+      @Enumerated(EnumType.STRING)
+      private StatusEntrega status;
+
+      // getters e setters
+  }
+  ```
+
 
 ## Bean Validation
 
