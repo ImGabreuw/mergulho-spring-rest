@@ -7,7 +7,7 @@ import me.gabreuw.algalog.domain.repository.EntregaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -20,7 +20,7 @@ public class SolicitacaoEntregaService {
     public Entrega solicitar(Entrega entrega) {
         entrega.setCliente(service.buscar(entrega.getCliente().getId()));
         entrega.setStatus(StatusEntrega.PENDENTE);
-        entrega.setDataPedido(LocalDateTime.now());
+        entrega.setDataPedido(OffsetDateTime.now());
 
         return repository.save(entrega);
     }

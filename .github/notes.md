@@ -390,3 +390,16 @@
 
     }
     ```
+
+## Data e Hora
+
+* O padrão de data e hora no Spring é ISO 8601
+
+  > ISO 8601 é um padrão internacional para representar data e hora publicada pela ISO (International Organization for Standardization)
+
+* Representação de data e/ou hora em ISO 8601 offset (offset = diferença de fuso horário local e UTC (GMT 0))
+
+  * Formato: `ano-mês-diaThora-minuto-segundo`
+    > **T** = separação entre data e hora
+
+  * Exemplo: `2021-04-30T20:00:00`

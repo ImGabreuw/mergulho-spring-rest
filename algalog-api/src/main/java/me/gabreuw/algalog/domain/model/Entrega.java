@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -32,10 +32,10 @@ public class Entrega {
     private BigDecimal taxa;
 
     @JsonProperty(access = READ_ONLY)
-    private LocalDateTime dataPedido;
+    private OffsetDateTime dataPedido;
 
     @JsonProperty(access = READ_ONLY)
-    private LocalDateTime dataFinalizacao;
+    private OffsetDateTime dataFinalizacao;
 
     @Valid
     @ConvertGroup(to = ValidationGroups.ClienteId.class)
