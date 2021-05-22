@@ -9,6 +9,11 @@
 
 > A algalog-api é uma api de logistica criado durante o evento Mergulho Spring Rest promovido pela AlgaWorks.
 
+## 📝 TODO
+
+- [ ] Padrão DTO no Cliente
+- [ ] Cancelamento de uma Entrega 
+
 ## ✏️ Modelo conceitual
 
 ![modelo-conceitual](https://github.com/ImGabreuw/mergulho-spring-rest/blob/master/.github/modelo-conceitual.PNG)
