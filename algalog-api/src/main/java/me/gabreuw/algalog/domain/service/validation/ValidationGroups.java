@@ -1,4 +1,4 @@
-package me.gabreuw.algalog.domain.model.validation;
+package me.gabreuw.algalog.domain.service.validation;
 
 public interface ValidationGroups {
 

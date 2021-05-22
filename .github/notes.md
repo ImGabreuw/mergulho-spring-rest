@@ -364,6 +364,35 @@
   }
   ```
 
+* `@OneToMany(mappedBy = "")`
+
+  ```java
+  @Entity
+  public class Entrega {
+
+      @Id
+      @GeneratedValue(strategy = IDENTITY)
+      private Long id;
+
+      private BigDecimal taxa;
+      private OffsetDateTime dataPedido;
+      private OffsetDateTime dataFinalizacao;
+
+      @ManyToOne
+      private Cliente cliente;
+
+      @Embedded
+      private Destinatario destinatario;
+
+      @OneToMany(mappedBy = "entrega") // nome da propriedade dona do relacionamento do lado inverso ("entrega")
+      private List<Ocorrencia> ocorrencias = new ArrayList<>();
+
+      @Enumerated(EnumType.STRING)
+      private StatusEntrega status;
+
+  }
+  ```
+
 ## Bean Validation
 
 * Documentação: [clique aqui](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
@@ -461,3 +490,21 @@
 
   }
   ```
+
+## Sub recursos
+
+* Exemplo de sub recurso de um recurso único
+
+  * URI = `http://localhost:8080/entregas/1/ocorrencias`
+
+  * Corpo da requisição
+
+    ```json
+    {
+      "descricao": "Tentativa sem sucesso (não estava em casa)"
+    }
+    ```
+
+    > EntregaId não é necessário uma vez que está presente na URI do recurso
+
+  * Código

@@ -1,6 +1,7 @@
 package me.gabreuw.algalog.api.exception_handler;
 
 import lombok.RequiredArgsConstructor;
+import me.gabreuw.algalog.domain.exception.EntidadeNaoEncontradaException;
 import me.gabreuw.algalog.domain.exception.NegocioException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -50,6 +51,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request
     ) {
         var status = HttpStatus.BAD_REQUEST;
+        var problema = new Problema();
+
+        problema.setStatus(status.value());
+        problema.setDataHora(OffsetDateTime.now());
+        problema.setTitulo(exception.getMessage());
+
+        return handleExceptionInternal(exception, problema, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ResponseEntity<Object> handleEntidadeNaoEncontradaException(
+            EntidadeNaoEncontradaException exception,
+            WebRequest request
+    ) {
+        var status = HttpStatus.NOT_FOUND;
         var problema = new Problema();
 
         problema.setStatus(status.value());
