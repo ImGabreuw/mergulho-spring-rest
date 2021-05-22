@@ -1,3 +1,9 @@
+# TODO
+
+- [ ] padrão DTO no Cliente
+- [ ] cancelamento de uma Entrega 
+
+
 # Mergulho Spring REST
 
 ### O que é REST?

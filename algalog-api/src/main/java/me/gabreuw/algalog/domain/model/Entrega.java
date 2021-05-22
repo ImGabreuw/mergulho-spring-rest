@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import me.gabreuw.algalog.domain.exception.NegocioException;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -51,5 +52,22 @@ public class Entrega {
         this.getOcorrencias().add(ocorrencia);
 
         return ocorrencia;
+    }
+
+    public void finalizar() {
+        if (naoPodeSerFinalizada()) {
+            throw new NegocioException("Entrega não pode ser finalizada");
+        }
+
+        setStatus(StatusEntrega.FINALIZADA);
+        setDataFinalizacao(OffsetDateTime.now());
+    }
+
+    public boolean podeSerFinalizada() {
+        return status == StatusEntrega.PENDENTE;
+    }
+
+    public boolean naoPodeSerFinalizada() {
+        return !podeSerFinalizada();
     }
 }
