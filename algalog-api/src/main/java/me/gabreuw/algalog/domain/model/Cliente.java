@@ -25,7 +25,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 public class Cliente {
 
-    @NotNull(groups = ValidationGroups.ClienteId.class)
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;

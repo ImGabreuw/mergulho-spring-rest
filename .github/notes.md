@@ -424,6 +424,12 @@
     }
     ```
 
+* OBS: Validações no modelo de domínio e no modelo de representação?
+
+  * Se todas as operações do sistema forem feitas **somente** através da API, então a validação no model de domínio se torna desnecessária. 
+
+  * Caso contrário, é importante manter essas validações, mesmo se forem duplicadas.
+
 ## Data e Hora
 
 * O padrão de data e hora no Spring é ISO 8601
@@ -436,3 +442,22 @@
     > **T** = separação entre data e hora
 
   * Exemplo: `2021-04-30T20:00:00`
+
+## ModelMapper
+
+* Documentação: [clique aqui](http://modelmapper.org/)
+
+* Conversão de objetos do modelo de domínio para o modelo de representação (DTO)
+
+* Configuração do ModelMapper
+  ```java
+  @Configuration
+  public class ModelMapperConfig {
+
+      @Bean // método que instancia um objeto e que será gerenciado pelo String na injeção de dependência
+      public ModelMapper modelMapper() {
+          return new ModelMapper();
+      }
+
+  }
+  ```

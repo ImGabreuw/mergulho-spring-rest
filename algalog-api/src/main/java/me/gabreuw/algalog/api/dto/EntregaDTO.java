@@ -14,13 +14,13 @@ public class EntregaDTO implements Serializable {
 
     private Long id;
 
-    private String nomeCliente;
     private BigDecimal taxa;
     private OffsetDateTime dataPedido;
     private OffsetDateTime dataFinalizacao;
 
     private StatusEntrega status;
 
-    private DestinatarioDTO destinatarioDTO;
+    private DestinatarioDTO destinatario;
+    private ClienteResumoDTO cliente;
 
 }
