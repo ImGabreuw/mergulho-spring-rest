@@ -64,8 +64,10 @@ $ cd target/
 $ java -jar algalog-api-0.0.1-SNAPSHOT
 ```
 
+Entrar em http://localhost:8080
+
 ## 📫 Contribuição
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+Para contribuir com mergulho-spring-rest, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <funcionalidade>`.
