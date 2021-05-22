@@ -1,6 +1,9 @@
 package me.gabreuw.algalog.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import me.gabreuw.algalog.api.dto.DestinatarioDTO;
+import me.gabreuw.algalog.api.dto.EntregaDTO;
+import me.gabreuw.algalog.domain.model.Destinatario;
 import me.gabreuw.algalog.domain.model.Entrega;
 import me.gabreuw.algalog.domain.repository.EntregaRepository;
 import me.gabreuw.algalog.domain.service.SolicitacaoEntregaService;
@@ -31,10 +34,37 @@ public class EntregaController {
     }
 
     @GetMapping(path = "/{entregaId}")
-    public ResponseEntity<Entrega> buscar( @PathVariable Long entregaId) {
+    public ResponseEntity<EntregaDTO> buscar(@PathVariable Long entregaId) {
         return repository.findById(entregaId)
+                .map(this::entregaMapper)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    private EntregaDTO entregaMapper(Entrega entrega) {
+        var dto = new EntregaDTO();
+
+        dto.setId(entrega.getId());
+        dto.setNomeCliente(entrega.getCliente().getNome());
+        dto.setDestinatarioDTO(destinatarioMapper(entrega.getDestinatario()));
+        dto.setTaxa(entrega.getTaxa());
+        dto.setStatus(entrega.getStatus());
+        dto.setDataPedido(entrega.getDataPedido());
+        dto.setDataFinalizacao(entrega.getDataFinalizacao());
+
+        return dto;
+    }
+
+    private DestinatarioDTO destinatarioMapper(Destinatario destinatario) {
+        var dto = new DestinatarioDTO();
+
+        dto.setNome(destinatario.getNome());
+        dto.setLogradouro(destinatario.getLogradouro());
+        dto.setNumero(destinatario.getNumero());
+        dto.setComplemento(destinatario.getComplemento());
+        dto.setBairro(destinatario.getBairro());
+
+        return dto;
     }
 
 }

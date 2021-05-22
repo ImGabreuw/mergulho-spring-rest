@@ -330,6 +330,39 @@
   }
   ```
 
+* `@Transient`
+  ```java
+  @Entity
+  public class Entrega {
+
+      @Id
+      @GeneratedValue(strategy = IDENTITY)
+      private Long id;
+
+      private BigDecimal taxa;
+
+      @JsonProperty(access = READ_ONLY) // impedir o consumidor da API de especificar dados que é fornecido automaticamente pela API 
+      private LocalDateTime dataPedido;
+
+      @JsonProperty(access = READ_ONLY)
+      private LocalDateTime dataFinalizacao;
+
+      @ManyToOne
+      private Cliente cliente;
+
+      @Embedded
+      private Destinatario destinatario;
+      
+      @JsonProperty(access = READ_ONLY)
+      @Enumerated(EnumType.STRING)
+      private StatusEntrega status;
+
+      @Transient //  o atributo não será mapeada para uma coluna da tabela **Entrega**
+      private String senha;
+
+      // getters e setters
+  }
+  ```
 
 ## Bean Validation
 
