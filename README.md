@@ -5,7 +5,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/ImGabreuw/mergulho-spring-rest?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/ImGabreuw/mergulho-spring-rest?style=for-the-badge)
 
-![demonstração](https://msr.algaworks.com/img/MSR_logo.f7f5959fd043d33bf2c2ec21498c19abfa170e0bcdca0b715f943a7afd402852.png)
+![demonstração](https://cafe.algaworks.com/wp-content/uploads/2021/04/MSR-300px.png)
 
 > A algalog-api é uma api de logistica criado durante o evento Mergulho Spring Rest promovido pela AlgaWorks.
 
